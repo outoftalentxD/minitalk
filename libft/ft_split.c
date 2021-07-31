@@ -6,7 +6,7 @@
 /*   By: melaena <melaena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 12:10:50 by melaena           #+#    #+#             */
-/*   Updated: 2021/07/31 23:00:49 by melaena          ###   ########.fr       */
+/*   Updated: 2021/07/31 23:05:39 by melaena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,6 @@ static char	*get_word(char *ptr, char c)
 		word[count++] = *temp++;
 	word[count] = 0;
 	return (word);
-}
-
-static void	process_leaks(char **strs, int strs_len)
-{
-	int		count;
-
-	count = -1;
-	while (++count < strs_len)
-		free(strs[count]);
-	free(strs);
 }
 
 char	**ft_split(char const *s, char c)

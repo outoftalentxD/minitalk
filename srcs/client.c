@@ -6,20 +6,20 @@
 /*   By: melaena <melaena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 16:27:38 by melaena           #+#    #+#             */
-/*   Updated: 2021/07/31 18:41:14 by melaen	a          ###   ########.fr       */
+/*   Updated: 2021/07/31 22:40:15 by melaena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void handle_error(char *message, int code)
+void	handle_error(char *message, int code)
 {
 	ft_putstr_fd("Error: ", 2);
 	ft_putendl_fd(message, 2);
 	exit(code);
 }
 
-void handler(int signum, siginfo_t *siginfo, void *context)
+void	handler(int signum, siginfo_t *siginfo, void *context)
 {
 	(void)context;
 	(void)siginfo;
@@ -30,10 +30,10 @@ void handler(int signum, siginfo_t *siginfo, void *context)
 	}
 }
 
-int send_byte(int byte, int pid)
+int	send_byte(int byte, int pid)
 {
-	int counter;
-	int error;
+	int	counter;
+	int	error;
 
 	counter = 1 << 6;
 	while (counter)
@@ -50,7 +50,7 @@ int send_byte(int byte, int pid)
 	return (1);
 }
 
-int send_message(char *message, int pid)
+int	send_message(char *message, int pid)
 {
 	while (*message)
 	{
@@ -61,7 +61,7 @@ int send_message(char *message, int pid)
 	return (1);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	struct sigaction	action;
 	int					pid;
@@ -72,7 +72,7 @@ int main(int argc, char **argv)
 		pid = ft_atoi(argv[1]);
 		message = argv[2];
 	}
-	else 
+	else
 	{
 		ft_putstr_fd("usage: ./client [SERVER_PID] [MESSAGE]\n", 1);
 		exit(0);
@@ -82,6 +82,6 @@ int main(int argc, char **argv)
 	action.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &action, NULL);
 	sigaction(SIGUSR2, &action, NULL);
-	send_message(message, pid);	
- 	return (0);
+	send_message(message, pid);
+	return (0);
 }
